@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Heart, Sparkles, Flower2, Mail, RotateCcw, Music2, Stars } from "lucide-react";
+import { Heart, Sparkles, Flower2, Mail, RotateCcw, Stars, HandHeart } from "lucide-react";
 import "./App.css";
 
 const hearts = Array.from({ length: 22 }, (_, i) => ({
@@ -33,39 +33,15 @@ function FloatingHearts() {
 
 function RoseGarden() {
   return (
-    <div className="rose-garden" aria-label="A little garden of roses">
-      <div className="rose rose-one"><span>🌹</span></div>
-      <div className="rose rose-two"><span>🌹</span></div>
-      <div className="rose rose-three"><span>🌹</span></div>
+    <div className="rose-garden" aria-label="A little garden of tulips">
+      <div className="rose rose-one"><span>🌷</span></div>
+      <div className="rose rose-two"><span>🌷</span></div>
+      <div className="rose rose-three"><span>🌷</span></div>
       <div className="rose rose-four"><span>🌷</span></div>
-      <div className="rose rose-five"><span>🌸</span></div>
+      <div className="rose rose-five"><span>🌷</span></div>
       <div className="garden-sparkle sparkle-a">✦</div>
       <div className="garden-sparkle sparkle-b">✧</div>
       <div className="garden-sparkle sparkle-c">✦</div>
-    </div>
-  );
-}
-
-function BirthdayCake({ candlesOut, onBlow }) {
-  return (
-    <div className={`cake-scene ${candlesOut ? "candles-out" : ""}`}>
-      <div className="cake-glow" />
-      <div className="candles">
-        {[0, 1, 2].map((candle) => (
-          <div className="candle" key={candle}>
-            <span className="flame" />
-            <span className="candle-stick" />
-          </div>
-        ))}
-      </div>
-      <div className="cake-top" />
-      <div className="cake-layer cake-layer-top"><span>♡</span><span>♡</span><span>♡</span></div>
-      <div className="cake-layer cake-layer-bottom" />
-      <div className="cake-plate" />
-      {candlesOut && <div className="wish-sparkles">✦ ✧ ✦</div>}
-      <button className="button button-primary blow-button" onClick={onBlow}>
-        {candlesOut ? "Your wish is on its way ✨" : "Blow out the candles"}
-      </button>
     </div>
   );
 }
@@ -88,23 +64,23 @@ function LoveLetter({ opened, onOpen }) {
         <article className="love-letter">
           <div className="letter-stamp">♡</div>
           <p className="letter-date">A little note, just for you</p>
-          <h3>To my dearest Mariya,</h3>
+          <h3>Meri jaan Mariya ❤️</h3>
           <p>
-            Happy Birthday, my love. ❤️ If I could wrap up every beautiful feeling
-            you bring into my life and give it to you today, I would.
+            Allah aapko lambi aur barkat wali zindagi ata farmaye, aur hamesha khush rakhe.
+            Aap humare liye bohot aham hain. Hum aapse bohot pyaar karte hain. Aap Allah ki
+            taraf se humare liye behtareen ne’maton mein se ek ne’mat hain. ❤️
           </p>
           <p>
-            You deserve gentle days, reasons to smile, dreams that come true, and
-            a heart that always feels appreciated. I hope this new year of your
-            life brings you more happiness than you can imagine.
+            Aap gussa ho ya naraz, hum aapse hamesha pyaar karte rahenge. Shayad humein apna
+            pyaar jatana nahi aata, lekin aap humare liye bohot khaas hain. Humari hamesha
+            koshish rahegi ki aapko khush rakhein aur har achhe-bure waqt mein aapka saath dein.
           </p>
           <p>
-            No website could ever hold everything I want to say, but I hope this
-            little surprise reminds you how special you are to me. Thank you for
-            being you — in every mood, every look, and every little moment.
+            Hum aapko naraz nahi karna chahte, lekin humse galti ho jaati hai. Toh apne is
+            masoom se ladke ko maaf kar dena. 🥹❤️
           </p>
-          <p className="letter-signoff">With all my love, today and always. ❤️</p>
-          <div className="letter-flower">🌹</div>
+          <p className="letter-signoff">Aapka masoom ladka,<br />Shaizad ❤️</p>
+          <div className="letter-flower">🌷</div>
         </article>
       )}
     </div>
@@ -113,7 +89,7 @@ function LoveLetter({ opened, onOpen }) {
 
 export default function App() {
   const [chapter, setChapter] = useState(0);
-  const [candlesOut, setCandlesOut] = useState(false);
+  const [duaRevealed, setDuaRevealed] = useState(false);
   const [letterOpened, setLetterOpened] = useState(false);
   const [showFinal, setShowFinal] = useState(false);
 
@@ -124,7 +100,7 @@ export default function App() {
 
   const restart = () => {
     setChapter(0);
-    setCandlesOut(false);
+    setDuaRevealed(false);
     setLetterOpened(false);
     setShowFinal(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -164,8 +140,8 @@ export default function App() {
           <p className="script-kicker">For someone wonderfully special</p>
           <h1>Happy Birthday,<br /><span>Mariya</span><i>♡</i></h1>
           <p className="hero-copy">
-            Today, the world gets to celebrate you.<br className="desktop-break" />
-            And I made a little something just for you.
+            Today, we celebrate you.<br className="desktop-break" />
+            Click the button below to open your surprise.
           </p>
           <button className="button button-primary" onClick={nextChapter}>
             Open your surprise <Heart size={17} fill="currentColor" />
@@ -194,21 +170,20 @@ export default function App() {
 
       {chapter === 2 && (
         <section className="story-screen cake-screen">
-          <div className="eyebrow"><Sparkles size={15} /> Chapter two · make a wish</div>
-          <p className="script-kicker">One candle for every beautiful possibility</p>
-          <h2>Make a wish,<br /><span>birthday girl.</span></h2>
-          <BirthdayCake candlesOut={candlesOut} onBlow={() => setCandlesOut(true)} />
-          {candlesOut ? (
-            <div className="wish-reveal">
-              <p className="wish-title">✨ Wish sent to the universe ✨</p>
-              <p>May your days be full of laughter, your heart full of peace, and your dreams find their way to you.</p>
-              <button className="button button-primary" onClick={nextChapter}>
-                Read your letter <Mail size={16} />
-              </button>
-            </div>
-          ) : (
-            <p className="cake-hint">Take a breath, close your eyes, and tap the button.</p>
-          )}
+          <div className="eyebrow"><HandHeart size={15} /> Chapter two · a special dua</div>
+          <p className="script-kicker">A prayer from my heart for you</p>
+          <div className="dua-card-image-wrap" style={{ width: "100%", padding: "0 12px", boxSizing: "border-box" }}>
+            <img
+              className="dua-card-image"
+              src={`${import.meta.env.BASE_URL}mariya-birthday-dua.png`}
+              alt="A birthday dua card for Mariya decorated with pink tulips and soft golden details"
+              style={{ display: "block", width: "100%", maxWidth: "430px", height: "auto", margin: "0 auto", borderRadius: "24px" }}
+            />
+          </div>
+          <button className="button button-primary" onClick={nextChapter}>
+            Read your letter <Mail size={16} />
+          </button>
+          <p className="cake-hint">A little dua, made with love and sincerity.</p>
         </section>
       )}
 
@@ -221,7 +196,7 @@ export default function App() {
           {letterOpened && (
             <div className="final-note">
               <Heart size={18} fill="currentColor" />
-              <p>And if you ever forget how loved you are, come back and open this little corner of the internet again.</p>
+              <p>Aur agar kabhi bhool jao ki aap kitni special hain, toh yeh chhota sa surprise phir se khol lena. ❤️</p>
               <button className="button button-outline" onClick={() => setShowFinal(!showFinal)}>
                 {showFinal ? "Hide my final surprise" : "One last little surprise"} <Sparkles size={15} />
               </button>
@@ -231,7 +206,8 @@ export default function App() {
                   <p className="script-kicker">In every season, in every version of you…</p>
                   <h3>I'm cheering for your happiness, always.</h3>
                   <p>Happy Birthday, Mariya. May this year be kind to you. ❤️</p>
-                  <div className="final-flowers">🌹 🌸 🌷 🌹</div>
+                  <p>I live you soooooooooo muchchchchchchch ❤️❤️❤️❤️</p>
+                  <div className="final-flowers">🌷 🌷 🌷 🌷</div>
                 </div>
               )}
             </div>
